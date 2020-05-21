@@ -17,10 +17,16 @@ public class MainActivity extends AppCompatActivity {
     private Button decButton;
     private Button incButton;
 
+    private final static String KEY_ORDER = "order";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState != null){
+            order = savedInstanceState.getInt(KEY_ORDER);
+        }
 
         orderView = findViewById(R.id.order_view);
         hilbertView = findViewById(R.id.hilbert_view);
@@ -62,5 +68,11 @@ public class MainActivity extends AppCompatActivity {
         if (BuildConfig.DEBUG && !f) {
             throw new AssertionError(message);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_ORDER, order);
     }
 }
